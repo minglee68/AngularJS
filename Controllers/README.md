@@ -125,7 +125,7 @@ Controller의 역할과 사용법을 익히기 위해서 Spicy Controller라는 
 	</body>
 </html>
 ~~~
-위의 예제에서 알아야할 몇 가지 사항들:  
+위의 예제에서 알아야할 사항들:  
 * `ng-controller` directive가 이 Template의 Scope를 만들고, 이 Scope는 `SpicyController` Controller로 관리된다.
 * `SpicyController`는 기본적인 JavaScript 함수이다. 전통적으로 Controller의 이름은 대문자로 시작하고, 뒤에 "Controller"라는 이름을 붙인다.
 * `$scope`에 property를 더함으로서 Model을 새로 만들거나 update를 한다. 
@@ -139,16 +139,133 @@ Controller는 아래와 같이 argument도 받을 수 있다.
 
 ~~~
 // spicy2.js
+(function(angular){
+	'use strict';
 
+	var myApp = angular.module('spicyApp2', []);
+	
+	myApp.controller('SpicyController', ['$scope', function($scope) {
+		$scope.customSpice = "wasabi"
+		$scope.spice = "very";
+
+		$scope.spicy = function(spice) {
+			$scope.spice = spice;
+		};
+	}]);
+})(window.angular);
 ~~~
 
 ~~~
 // spicy2.html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Controller Example</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+		<script src="spicy2.js"></script>
+	</head>
+	<body ng-app="spicyApp2">
+		<div ng-controller="SpicyController">
+			<input ng-model="customSpice">
+			<button ng-click="spicy('chili')">Chili</button>
+			<button ng-click="spicy(customSpice)">Custom spice</button>
+			<p>The food is {{spice}} spicy!</p>
+		</div>
+	</body>
+</html>
+~~~
+이제 `SpicyController` Controller는 `spicy`라는 한 method만 가지고 있다. 이 `spicy`라는 method는 argument를 `spice`라는 변수명으로 받고 있다. Template에서는 처음엔 `spicy` method의 argument로 'chili'를 보냈고, 다음엔 위의 Input box에서 지정된 `customSpice`라는 model property를 argument로 보내고 있다. 
+
+
+
+### 3. Scope Inheritance Example
+
+AngularJS를 사용할 때에 Controller를 DOM Hierarchy의 다른 레벨에 연결시키는 것은 흔한 일이다. 처음에 설명할 때에 말했듯이 `ng-controller`는 새로운 child scope를 만들기 때문에 child scope들은 자신들의 parent scope에서부터 Property나 Method를 상속받는다. 아래의 예제는 그 구체적인 예를 보여준다.
+
+~~~
+// spicy3.js
+(function(angular){
+	'use strict';
+
+	var myApp = angular.module('scopeInheritance', []);
+	
+	myApp.controller('MainController', ['$scope', function($scope) {
+		$scope.timeOfDay = 'mornig';
+		$scope.name = 'Nikki';
+	}]);
+
+	myApp.controller('ChildController', ['$scope', function($scope) {
+		$scope.name = 'John';
+	}]);
+
+	myApp.controller('GrandChildController', ['$scope', function($scope) {
+		$scope.timeOfDay = 'evening';
+	}]);
+})(window.angular);
+~~~
+
+~~~
+// spicy3.html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Controller Example</title>
+		<link href="spicy3.css" rel="stylesheet" type="text/css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+		<script src="spicy3.js"></script>
+	</head>
+	<body ng-app="scopeInheritance">
+		<div class="spicy">
+			<div ng-controller="MainController">
+				<p>Good {{timeOfDay}}, {{name}}!</p>
+				<div ng-controller="ChildController">
+					<p>Good {{timeOfDay}}, {{name}}!</p>
+					<div ng-controller="GrandChildController">
+						<p>Good {{timeOfDay}}, {{name}}!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+~~~
+
+~~~ 
+// spicy3.css
+div.spicy div{
+	padding: 10px;
+	border: solid 2px blue;
+}
+~~~
+
+위의 예제에서 HTML 파일을 보면 3 Controller를 어떻게 상속시켰는지 확인할 수 있다. 이것으로 인해서 이 view에는 아래의 4개의 scope가 만들어 진다.  
+* Root Scope (body에서 ng-app로 AngularJS의 Application을 시작하면서 생긴 전체의 scope)
+* `MainController`의 scope. 이 scope에는 `timeOfDay`와 `name` property가 지정되어 있다.
+* `ChildController`의 scope. 이 scope에는 `name` property만 지정되어 있다.
+* `GrandChildController`의 scope. 이 scope에는 `timeOfDay` property만 지정되어 있다.
+위의 코드를 실행시켜 보면 알 수 있듯이, `ChildController`의 scope에는 `name` property만 지정되어 있지만 parent scope인 `MainController`의 scope에 있는 `timeOfDay` property를 상속받아서 사용했고, `GrandChildController`의 scope에는 `timeOfDay` property만 지정되어 있지만 parent scope인 `ChildController`의 scope에 있는 `name` property를 상속받아서 사용했다. Method도 이와 같이 상속되서 사용할 수 있다.  
+
+
+
+### 4. Testing Controllers
+Controller를 Testing하는 방법은 여러가지 있지만, 가장 좋은 방법 중 하나는 **$rootScope**와 **$controller**를 사용하는 것이다.  
+
+~~~
+// condefine.js
+// Controller Definintion
+
+~~~
+
+~~~
+// contest.js
+// Controller Test
 
 ~~~
 
 
-
+아직 작업 중입니다;;
 
 
 
