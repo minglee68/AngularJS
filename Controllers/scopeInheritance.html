@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Controller Example</title>
+		<link href="spicy3.css" rel="stylesheet" type="text/css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+		<script src="spicy3.js"></script>
+	</head>
+	<body ng-app="scopeInheritance">
+		<div class="spicy">
+			<div ng-controller="MainController">
+				<p>Good {{timeOfDay}}, {{name}}!</p>
+				<div ng-controller="ChildController">
+					<p>Good {{timeOfDay}}, {{name}}!</p>
+					<div ng-controller="GrandChildController">
+						<p>Good {{timeOfDay}}, {{name}}!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
