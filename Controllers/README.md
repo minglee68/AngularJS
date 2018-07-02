@@ -83,16 +83,73 @@ Controller의 역할과 사용법을 익히기 위해서 Spicy Controller라는 
 * `spice`의 값을 정하는 두 함수를 가지고 있는 Controller
 이 Template의 메시지는 `spice` model의 binding을 가지고 있다. `spice`의 기본값은 "very"이고, 사용자가 누르는 버튼에 따라서 `spice`가 "chili"가 되거나 "jalapeno"가 된다. 그리고 메시지는 data-binding으로 자동으로 update된다.
 
+### 1. Simple Spicy Controller
+
 ~~~
 // spicy1.js
+(function(angular){
+	'use strict';
 
+	var myApp = angular.module('spicyApp1', []);
+	
+	myApp.controller('SpicyController', ['$scope', function($scope) {
+		$scope.spice = "very";
 
+		$scope.chiliSpicy = function(){
+			$scope.spice = "chili";
+		};
+
+		$scope.jalapenoSpicy = function(){
+			$scope.spice = "jalapeno";
+		};
+	}]);
+})(window.angular);
 ~~~
 
 ~~~
 // spicy1.html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Controller Example</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+		<script src="spicy1.js"></script>
+	</head>
+	<body ng-app="spicyApp1">
+		<div ng-controller="SpicyController">
+			<button ng-click="chiliSpicy()">Chili</button>
+			<button ng-click="jalapenoSpicy()">Jalapeno</button>
+			<p>The food is {{spice}} spicy!</p>
+		</div>
+	</body>
+</html>
+~~~
+위의 예제에서 알아야할 몇 가지 사항들:  
+* `ng-controller` directive가 이 Template의 Scope를 만들고, 이 Scope는 `SpicyController` Controller로 관리된다.
+* `SpicyController`는 기본적인 JavaScript 함수이다. 전통적으로 Controller의 이름은 대문자로 시작하고, 뒤에 "Controller"라는 이름을 붙인다.
+* `$scope`에 property를 더함으로서 Model을 새로 만들거나 update를 한다. 
+* `chiliSpicy`함수에서 보여지듯이, Controller method는 직접 `$scope`로 더해질 수 있다. 
+* Controller의 method나 property들은 그 Template에서 사용될 수 있다. (\<div\> element와 그 child element들, \<button\>이나 \<p\>에서)    
+  
+  
+### 2. Spicy Controller with Arguments
 
+Controller는 아래와 같이 argument도 받을 수 있다.  
 
 ~~~
+// spicy2.js
+
+~~~
+
+~~~
+// spicy2.html
+
+~~~
+
+
+
+
+
 
 
