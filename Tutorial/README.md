@@ -1,8 +1,8 @@
 AngularJS Tutorial
 ===================
-https://www.flapism.jp/javascript/485/  
-위의 사이트에서 하는 튜토리얼을 그대로 따라하는 과정이다.  
-일본어가 가능하다면 직접 보고 하는 것도 좋다.  
+https://docs.angularjs.org/guide/concepts  
+위의 AngularJS 사이트의 튜토리얼을 따라하고 정리한 것이다.  
+영어가 괜찮다면 직접 가서 보는 것이 좋다.  
 
 AngularJS의 특징
 ==================
