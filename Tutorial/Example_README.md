@@ -39,3 +39,18 @@ AngularJS에는 attribute 뿐만이 아니라 어떤 특정 element에 대한 di
   
 이 예제에서 가장 중요한 점은 입력한 값들이 **live binding**이 된다는 것이다. 입력이 바뀌는 순간 `expression`으로 나오는 출력이 다시 계산되고 DOM이 그 값으로 바뀌어서 출력이 바뀌는 것이다. 이런 컨셉을 Two-way data binding (쌍방향 데이터 바인딩)이라고 한다.
 
+
+
+Second Example: Adding UI logic (Controllers)
+---------------------------------------------
+두번째로 위의 예제를 사용해서 가격을 여러 나라의 가격 단위로 표현되도록 해보자.  
+
+~~~
+// invoice1.js
+
+~~~
+
+~~~
+// second_example.html
+
+~~~
