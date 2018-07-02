@@ -1,0 +1,12 @@
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+	<div ng-app="ex2">
+		<form name="userInfo">
+			<input required="required" ng-model="userName" ng-minlength="6" ng-maxlength="12" type="text" />
+			<p><label>Input:</label> {{userName}} </p>
+
+			<span ng-show="userInfo.userName.$error.required">Necessary</span>
+			<span ng-show="userInfo.userName.$error.minlength">More than 6 letters</span>
+			<span ng-show="userInfo.userName.$error.maxlength">Less than 12 letters</span>
+			<span ng-show="userInfo.userName.$valid">OK</span>
+		</form>
+	</div>
