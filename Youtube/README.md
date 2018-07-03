@@ -16,6 +16,9 @@ Quick Overview on AngularJS
 * Web Page에서 Data가 바뀜에 따라서 Model의 Data도 바뀌고, Model의 Data가 바뀜으로 Web Page가 바뀌게 된다.
 * AngularJS에는 많이 사용하는 기능을 Built-in Service로 제공하고 있다.
   
+
+### Examples
+
 아래에서 예제를 통해서 기본적인 기능들을 하나씩 빠르게 알아보자.
 
 ~~~
@@ -44,6 +47,9 @@ var app1 = angular.module('app1', []);
 위른 자세히 설명해보자. 먼저 이 스크립트를 만드는 이유는 AngularJS Module를 만들기 위한 것이다. AngularJS Module은 HTML의 일부로서의 AngularJS Application과 작동하기 위해서 만들어지고, 이를 통해서 다양한 AngularJS 기능들을 사용하기 위함이다.   
   
 위에서 `angular.module(...)`은 첫번째 argument로 `'app1'`이라는 이름을 이 모듈의 이름으로 받는다. 다음 argument에선 `[]`를 통해서 다양한 Module들을 Array형식으로 받는다. 이번엔 다른 Module을 사용하지 않기 때문에 빈칸으로 놔둔다.  
+  
+#### ng-app
+
 Module의 이름을 지정하는 이유는 그래야지 HTML에서 사용할 수 있기 때문이다. 이번엔 `'app1'`이라는 이름으로 만들었기 때문에, 'angulartut.html'로 돌아가서 html tag안에 이 이름을 넣어주면 된다. 넣어주는 방법은 아래와 같다.  
   
 ~~~
@@ -55,6 +61,8 @@ Module의 이름을 지정하는 이유는 그래야지 HTML에서 사용할 수
 ~~~
 `ng-app`라는 attribute를 통해서 사용할 Module을 이름으로 지정해준다. 이것을 함으로써 AngularJS가 어디에서부터 컴파일링을 시작하면 될지 알 수 있다. 'app1'이라는 것은 위에서 말했듯이 Module의 이름이고, 이 Module은 우리가 import한 JavaScript 파일에 있어야 된다.  
   
+#### ng-init
+
 Module의 이름 외에도 여러가지를 넣을 수 있는데, 예를 들자면 `ng-init`라는 Directive를 통해서 Application의 Data를 초기화시키는 것이다.아래와 같이 하면 된다.  
   
 ~~~
@@ -66,6 +74,8 @@ Module의 이름 외에도 여러가지를 넣을 수 있는데, 예를 들자�
 ~~~
 여기에선 `person`이라는 이름의 object와 `capitals`라는 이름의 object array를 초기화 시켜줬다. 이렇게 하면 AngularJS가 `ng-app`를 찾아서 컴파일을 시작하는 순간 `ng-init`을 찾으면 그 안에 있는 값들을 자동적으로 만들어서 Scope의 Model에 넣는다.  
   
+#### Controller
+
 다음으로는 Controller를 사용하기 위해서 body안에서 Controller를 선언할 것이다.  
   
 ~~~
@@ -96,8 +106,9 @@ app1.controller('ctrl1', function($scope) {
 
 ~~~
 위에서는 `app1.controller(...)`를 해서 'app1'모듈의 Controller를 만든다. controller() method의 첫번째 argument는 이 Controller의 이름이고, 두번째로 함수를 보내주는데, 이것은 Controller의 일종의 Factory Function이다.  
-Factory Function은 이 Controller가 사용될 수 있도록 준비해주고, 이 Factory Function의 parameter로 받아진 `$scope`는 이 Factory Function이 사용하는 Dependency이다. 이것을 통해서 AngularJS는 이 함수가 불려질 때마다 `$scope` object를 건내준다. 이 작업을 **Dependency Injection**이라고 부른다. 
-`$scope`는 HTML element와 Scope안에 있는 변수들을 연결시켜준다. 이제 이 Factory Function안에 값을 지정해주거나 함수를 만들어줄 수 있다.  
+Factory Function은 이 Controller가 사용될 수 있도록 준비해주고, 이 Factory Function의 parameter로 받아진 `$scope`는 이 Factory Function이 사용하는 Dependency이다. 이것을 통해서 AngularJS는 이 함수가 불려질 때마다 `$scope` object를 건내준다. 이 작업을 **Dependency Injection**이라고 부른다. `$scope`는 HTML element와 Scope안에 있는 변수들을 연결시켜준다.  
+  
+이제 이 Factory Function안에 값을 지정해주거나 함수를 만들어줄 수 있다.  
   
 ~~~
 // exam1.js
@@ -120,6 +131,8 @@ app1.controller('ctrl1', function($scope) {
   
 여기서 중요한 점이 두 가지 있다. 하나는 `$scope.calculation`은 `$scope.first`와 `$scope.second`를 더한 값이 아니라는 것이다. 두 수를 더한 식이 `$scope.calculation`에 들어간다. 다른 하나는 식의 마지막 부분에서 각 변수 앞에 `+`룰 붙인 것이다. 이것을 함으로서 String이 들어오면 자동으로 Integer로 바꿔준다.   
   
+#### HTML Output
+   
 이제 HTML로 돌아가서 출력해보자.  
   
 ~~~
@@ -144,6 +157,8 @@ app1.controller('ctrl1', function($scope) {
 마지막으로 `updateValue()`함수를 통해서 얻어진 Scope값을 사용하기 위해선 Expression을 사용할 것이다. 사용하는 방법은 단순하게 `{{}}`의 안에 사용할 Scope의 property의 이름(`calculation`)을 적어넣으면 된다. 그러면 `first`와 `second`의 값을 바꾸고 'Sum' button을 누르면 `updateValue()`함수가 실행되서 자동으로 `$scope.calculation`의 값이 바뀌고 그 데이터는 바로 Expression과 data-binding이 되어서 사용된다.  
   
   
+#### Expression
+
 위의 예제와 같이 Expression에서는 변수의 값을 단순히 출력할 뿐만 아니라 계산이나 다른 작업들도 할 수 있다.  
   
 ~~~
