@@ -26,6 +26,15 @@
 					{{grocery.item}} {{$index}}
 				</li>
 			</ol>
+			
+			<table border="1">
+				<tr ng-repeat-start="grocery in groceries">
+					<td> {{grocery.item}}</td>
+				</tr>
+				<tr ng-repeat-end>
+					<td> {{grocery.purchased}}</td>
+				</tr>
+			</table>
 		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>

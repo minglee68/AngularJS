@@ -166,10 +166,14 @@ app3.controller('gListCtrl', function($scope) {
 ...
 ~~~
 먼저 `ng-controller`로 `gListCtrl` Controller를 사용해서 View가 시작된다.  
+  
 첫번째는 Expression에 직접 property를 입력해줘서 출력시키는 방법이다.  
 두번째는 첫번째와 같은 결과가 나오지만 Expression을 사용하지 않고 `ng-bind`로 출력시키는 방법이다.  
+  
 세번째는 object array의 특정 항목만 출력하는 방법이다. 참고로 여기에서 사용한 것 같이 `style`을 tag에서 지정하는 습관은 안 들이는게 좋다.  
+  
 마지막은 object array의 나머지 항목들을 반복으로 출력하는 방법이다. ol tag의 `start` attribute는 주어진 번호부터 시작하라는 것이다. 세번째에서 이미 1번을 출력했기 때문에 2번부터 출력하기 위해서 이런 식으로 지정해준다. 다음으로 li tag에서 `ng-repeat`에 `"grocery in groceries`를 넣음으로써 Scope의 `groceries` property에서 object를 하나씩 `grocery` property에 넣어서 `groceries`의 모든 object를 사용할 때 까지 반복한다.  
+  
 여기서 외워야 될 것은 `ng-if`이다. 세번째에서 이미 `groceries`의 첫번째 object인 `Tomatoes`를 출력했기 때문에 그것을 무시하기 위해선 첫번째 index인 '0'을 무시해야 한다. 그러기 위해서 li tag안에 `ng-if`를 통해 `$index`가 0보다 클 때에만 출력하도록 했다. 이를 통해서 첫번째 object를 무시하고 `groceries[1]`부터 `grocery`에 들어가서 출력된 것이다.  
 참고로 `$index`외에도 이런 경우에 `ng-if`에서 쓰이는 것들이 많다:  
 * $first : 첫번째 요소일 때만 True.
@@ -177,7 +181,32 @@ app3.controller('gListCtrl', function($scope) {
 * $middle : 첫번째도 마지막도 아닐 때만 True.
 * $even : 짝수 요소일 때만 True.
 * $odd : 홀수 요소일 때만 True.
+  
 
+ng-repeat-start & ng-repeat-end
+--------------------------------
+`ng-repeat`에는 단점이 하나있다. 그것은 `ng-repeat`가 추가된 HTML element에서만 사용 가능하다는 것이다. 따라서 2개 이상의 element에서 `ng-repeat`을 쓰기는 매우 어렵다는 것이다. 이것을 해결하기 위해서 AngularJS는 1.2버전부터 `ng-repeat-start`와 `ng-repeat-end`를 소개를 했다. 이로써 `ng-repeat-start`로 시작한 HTML element부터 `ng-repeat-end`로 끝내는 HTML element까지 `ng-repeat`이 적용되게 됬다. 아래가 구체적인 예시이다.  
+  
+~~~
+// angulartut3.html
+...
+
+<div id="groceryList" ng-controller="gListCtrl">
+
+	...
+
+	<table>
+		<tr ng-repeat-start="grocery in groceries">
+			<td>{{grocery.item}}</td>
+		</tr>
+		<tr ng-repeat-end>
+			<td>{{grocery.purchased}}</td>
+		</tr>
+	</table>
+
+	...
+~~~
+위의 예제에선 `grocery`의 `item`과 `purchased`의 값을 다른 HTML element에서 출력을 하고 싶었기 때문에 `ng-repeat-start`와 `ng-repeat-end`를 사용해서 start부분부터 end부분까지를 한 interval로 생각하고 통틀어서 반복을 시킨 것이다. 그래서 각 property에 맞는 값이 출력된다.  
 
 
 
