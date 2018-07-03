@@ -94,7 +94,7 @@ HTML에는 2개의 View를 더 만든다.
 
 ...
 ~~~
-2개의 h4 element에서 각각 `batCtrl` Controller와 `goodCtrl` Controller를 나눠서 사용한다. 그러면 각각의 property가 Expression으로 출력된다.  
+2개의 h4 element에서 각각 `badCtrl` Controller와 `goodCtrl` Controller를 나눠서 사용한다. 그러면 각각의 property가 Expression으로 출력된다.  
 
 ng-cloak
 ---------
@@ -102,14 +102,81 @@ ng-cloak
   
 ~~~
 // angulartut3.html
+<!DOCTYPE html>
+<html ng-app="app3" ng-cloak>
+	<head>
+		<title>Example</title>
+		<style>
+		[ng\:cloak], [ng-cloak], .ng-cloak {
+			display: none;
+		}
+		</style>
+	</head>
+	<body>
 
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+		<script src="exam3.js"></script>
+
+	</body>
+</html>
 ~~~
-
+위의 예제에서 볼 수 있듯이 먼저 html tag안에 `ng-cloak`를 더하고, head안의 style 부분에 위에 적혀있는 대로 더한다. style부분에 더하는 것은 만일 AngularJS를 import하는 script가 head부분에 있다면 할 필요는 없다. 저 부분의 뜻은 AngularJS의 컴파일이 끝나서 출력준비가 다 될 때까지 출력을 하지 않는다는 뜻이다. 저렇게 넣기만 하면 된다.  
+  
+이제 실제로 출력을 해보기 위해서 Module에 아래와 같이 데이터를 넣어보자.  
+  
 ~~~
 // exam3.js
+var app3 = angular.module('app3', []);
 
+app3.controller('gListCtrl', function($scope) {
+	$scope.groceries = [
+		{item: "Tomatoes", purchased: false},
+		{item: "Potatoes", purchased: false},
+		{item: "Bread", purchased: false},
+		{item: "Hummus", purchased: false}
+	];
+});
 ~~~
+위와 같이 object array를 `$scope.groceries`안에 넣고, 이것을 `gListCtrl` Controller로 사용할 수 있게 한다. 그런 뒤 아래와 같이 HTML 파일에 더하면 된다.  
+  
+~~~
+// angulartut3.html
+...
 
+<body>
+	<div id="groceryList" ng-controller="gListCtrl">
+		
+		<h3 class="ListTitle">{{groceries.length}} Groceries to Get</h3>
+
+		<h3 class="ListTitle">
+			<span ng-bind="groceries.length"></span> Groceries to Get
+		</h3>
+		
+		<ol style="margin: 0 0 -15px 0;">
+			<li>{{groceries[0].item}}</li>
+		</ol>
+		
+		<ol start="2">
+			<li ng-repeat="grocery in groceries" ng-if="$index > 0">
+				{{grocery.item}} {{$index}}
+			</li>
+		</ol>
+	</div>
+
+...
+~~~
+먼저 `ng-controller`로 `gListCtrl` Controller를 사용해서 View가 시작된다.  
+첫번째는 Expression에 직접 property를 입력해줘서 출력시키는 방법이다.  
+두번째는 첫번째와 같은 결과가 나오지만 Expression을 사용하지 않고 `ng-bind`로 출력시키는 방법이다.  
+세번째는 object array의 특정 항목만 출력하는 방법이다. 참고로 여기에서 사용한 것 같이 `style`을 tag에서 지정하는 습관은 안 들이는게 좋다.  
+마지막은 object array의 나머지 항목들을 반복으로 출력하는 방법이다. ol tag의 `start` attribute는 주어진 번호부터 시작하라는 것이다. 세번째에서 이미 1번을 출력했기 때문에 2번부터 출력하기 위해서 이런 식으로 지정해준다. 다음으로 li tag에서 `ng-repeat`에 `"grocery in groceries`를 넣음으로써 Scope의 `groceries` property에서 object를 하나씩 `grocery` property에 넣어서 `groceries`의 모든 object를 사용할 때 까지 반복한다.  
+여기서 외워야 될 것은 `ng-if`이다. 세번째에서 이미 `groceries`의 첫번째 object인 `Tomatoes`를 출력했기 때문에 그것을 무시하기 위해선 첫번째 index인 '0'을 무시해야 한다. 그러기 위해서 li tag안에 `ng-if`를 통해 `$index`가 0보다 클 때에만 출력하도록 했다. 이를 통해서 첫번째 object를 무시하고 `groceries[1]`부터 `grocery`에 들어가서 출력된 것이다.  
+참고로 `$index`외에도 이런 경우에 `ng-if`에서 쓰이는 것들이 많다:  
+* $first : 첫번째 요소일 때만 True.
+* $last : 마지막 요소일 때만 True.
+* $middle : 첫번째도 마지막도 아닐 때만 True.
+* $even : 짝수 요소일 때만 True.
+* $odd : 홀수 요소일 때만 True.
 
 
 
