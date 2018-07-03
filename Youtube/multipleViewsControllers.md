@@ -67,8 +67,49 @@ Multiple Controllers
   
 ~~~
 // exam2.js
+...
+
+app2.controller('badCtrl', function($scope) {
+	var badFeelings = ["Disregarded", "Unimportant", "Rejected", "Powerless"];
+
+	$scope.bad = badFeelings[Math.floor((Math.random() * 4))];
+});
+
+app2.controller('goodCtrl', function($scope) {
+	var goodFeelings = ["Pleasure", "Awesome", "Lovable", "InnerPeace"];
+
+	$scope.good = goodFeelings[Math.floor((Math.random() * 4))];
+});
+~~~
+원래 있던 Controller는 지우지 않고 새로운 Controller 2개를 만든다. 각각의 이름은 `'badCtrl'`과 `'goodCtrl'`이고, 각각 나쁜 기분과 좋은 기분에 대한 단어들이 있는 Array가 있으며, 그것을 Random하게 뽑아내서 `$scope.bad`나 `$scope.good`안에 넣는다.   
+  
+HTML에는 2개의 View를 더 만든다.  
+  
+~~~
+// angulartut2.html
+...
+
+<h4 ng-controller="badCtrl">I'm feeling {{bad}}</h4>
+<h4 ng-controller="goodCtrl">I'm feeling {{good}}</h4>
+
+...
+~~~
+2개의 h4 element에서 각각 `batCtrl` Controller와 `goodCtrl` Controller를 나눠서 사용한다. 그러면 각각의 property가 Expression으로 출력된다.  
+
+ng-cloak
+---------
+위의 예제들을 실행해보면 Random하게 출력이 잘 되지만, 출력 될 때에 잠시동안 `{{...}}`부분이 보인다. 이것을 지우기 위해서 `ng-cloak`라는 것을 사용한다. 사용하기 위해선 아래의 예제와 같이 사용하면 된다.  
+  
+~~~
+// angulartut3.html
 
 ~~~
+
+~~~
+// exam3.js
+
+~~~
+
 
 
 
