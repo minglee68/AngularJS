@@ -52,7 +52,7 @@ var app1 = angular.module('app1', []);
 ### ng-app
 * * *
 
-Module의 이름을 지정하는 이유는 그래야지 HTML에서 사용할 수 있기 때문이다. 이번엔 `'app1'`이라는 이름으로 만들었기 때문에, 'angulartut.html'로 돌아가서 html tag안에 이 이름을 넣어주면 된다. 넣어주는 방법은 아래와 같다.  
+Module의 이름을 지정하는 이유는 지정해야지 HTML에서 사용할 수 있기 때문이다. 이번엔 `'app1'`이라는 이름으로 만들었기 때문에, 'angulartut.html'로 돌아가서 html tag안에 이 이름을 넣어주면 된다. 넣어주는 방법은 아래와 같다.  
   
 ~~~
 // angulartut.html
