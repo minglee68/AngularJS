@@ -34,6 +34,14 @@
 
 			<p ng-class="textStyling">Some Random Text</p>
 
+			<table>
+				<tr ng-repeat="item in capitals"
+				ng-class-even="'stripedblue'"
+    				ng-class-odd="'stripedbeige'">
+					<td>{{item.City}}</td>
+					<td>{{item.State}}</td>
+				</tr>
+			</table>
 		</div>
 			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 			<script src="exam5.js"></script>

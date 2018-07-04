@@ -261,8 +261,52 @@ Change Classes Dynamically
   
 ~~~
 // angulartut6.html
+<!DOCTYPE html>
+<html ng-app="app5" ng-cloak>
+	<head>
+		<title>Example</title>
+		<style>
+		[ng\:cloak], [ng-cloak], .ng-cloak {
+			display: none;
+		}
+		.bluetext {
+			color: blue;
+		}
+		.boldtext {
+			font-weight: bold;
+		}
+		.stripedblue {
+			color: #007FFF;
+			background-color: #DBE9F4;
+		}
+		.stripedbeige {
+			color: #CC0000;
+			background-color: #F5F5DC
+		}
+		</style>
+	</head>
+	<body>
+		<div ng-controller="eventCtrl">
+		
+			<p>
+				<select ng-model="textStyling">
+					<option value="bluetext">Blue Text</option>
+					<option value="boldtext">Bold Text</option>
+				</select>
+			</p>
 
+			<p ng-class="textStyling">Some Random Text</p>
+
+		</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+			<script src="exam5.js"></script>
+	</body>
+</html>
 ~~~
+먼저 CSS를 보면 `.bluetext`, 그리고 `.boldtext`처럼 class이름이 'bluetext'이거나 'boldtext'인 HTML Element들을 위한 CSS가 있다. 그리고 `app5` Module과 연결하고 `eventCtrl`을 부른뒤, select element 안에 `ng-model`로 새로운 `textStyling`이라는 property를 만들었다. 여기에서 정해진 option의 `value`가 `textStyling`안에 들어간다. 그리고 그 `textStyling`의 값이 다음 p element의 `ng-class`안에 동적으로 바뀐다.  
+  
+위와 같은 이유때문에 사용자가 option으로 'Blue Text'를 선택하면 `textStyling`의 값이 `bluetext`로 바뀌고, 이 `bluetext`가 다음 p element의 class가 된고, 'Bold Text'를 선택하면 `textStyling`의 값이 `boldtext`로 바뀌고, 이 값이 다음 p element의 class가 된다. 결과적으로 해당하는 Class의 CSS가 적용이 된다.  
+  
 
 
 
