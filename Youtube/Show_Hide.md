@@ -308,8 +308,32 @@ Change Classes Dynamically
 위와 같은 이유때문에 사용자가 option으로 'Blue Text'를 선택하면 `textStyling`의 값이 `bluetext`로 바뀌고, 이 `bluetext`가 다음 p element의 class가 된고, 'Bold Text'를 선택하면 `textStyling`의 값이 `boldtext`로 바뀌고, 이 값이 다음 p element의 class가 된다. 결과적으로 해당하는 Class의 CSS가 적용이 된다.  
   
 
+Class를 동적으로 바꾸는 방법은 다른 방법들도 있다. 그 중의 하나만 소개하자면, 짝수번째의 Element와 홀수번째의 Element의 Class를 다르게 동적으로 받는 것이다. 말로만 들으면 잘 이해가 안 갈수도 있으니 아래의 예제를 봐보자.  
+  
+~~~
+// angulartut6.html
+...
 
+<div ng-controller="eventCtrl">
+	
+	...
 
+	<table>
+		<tr ng-repeat="item in capitals"
+		ng-class-even="'stripedblue'"
+  		ng-class-odd="'stripedbeige'">
+			<td>{{item.City}}</td>
+			<td>{{item.State}}</td>
+		</tr>
+	</table>
+
+</div>
+
+...
+~~~
+여기에서 우리는 위의 'exam5.js'에 더했었던 `$scope.capitals`를 사용할 것이다. 이 HTML 파일의 목적은 `ng-repeat`으로 반복해서 `$scope.capitals`에 있는 모든 값들을 Table형식으로 출력하는 것인데, 홀수번째 Element들에겐 `stripedbeige` Class의 CSS를, 짝수번째 Element들에겐 `stripedblue` Class의 CSS를 적용시키는 것이다.  
+  
+위의 예제를 봐보면 tr element 안에서 `ng-repeat`을 통해서 `$scope.capitals`의 object array중 한 object씩 `item`에 넣어서 반복해서 사용한다. 이 때에 홀수번째의 반복에선 `stripedbeige`가 class가 되도록 `ng-class-odd`를 통해서 설정했고, 짝수번째의 반복에선 `stripedblue`가 class가 되도록 `ng-class-even`을 설정했다. 그런 뒤 td element에서 Expression을 통해서 먼저 `item`의 `City`값을, 그리고 `item`의 `State`값을 출력하도록 했다. 
 
 
 
