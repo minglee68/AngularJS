@@ -210,4 +210,35 @@ ng-repeat-start & ng-repeat-end
 
 
 
+ng-switch
+----------
+`ng-switch`를 이용해서 Scope의 어떤 property의 값에 따라서 출력을 바꿀 수도 있다.  
+  
+~~~
+// angulartut3.html
+...
+
+<div id="groceryList" ng-controller="gListCtrl">
+	
+	...
+
+	<label>Type a Number (1 to 4):
+		<input type="text" ng-model="someNumber">
+	</label>
+
+	<div ng-switch="someNumber">
+		<p ng-switch-when="1">You entered 1</p>
+		<p ng-switch-when="2">You entered 2</p>
+		<p ng-switch-when="3">You entered 3</p>
+		<p ng-switch-when="4">You entered 4</p>
+		<p ng-switch-default="1">Not Following Directions</p>
+	</div>
+
+	...
+
+~~~
+먼저 Text Box로 `someNumber`의 값을 받는다. 그리고 그 값에 따라서 출력이 달라지도록 다음 div element에 `ng-switch`를 더하면서 `ng-switch`안에 `"someNumber"`를 넣는다. 그러면 위의 Text Box를 통해서 들어간 someNumber의 값에 따라서 출력이 바뀌는데, 그 작용을 `ng-switch-when`이 담당한다. 그리고 1~4 사이의 값이 아닌 경우엔 `ng-switch-default`가 출력된다.  
+  
+
+
 
