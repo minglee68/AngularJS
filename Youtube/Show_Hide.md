@@ -150,6 +150,73 @@ app4.controller('eventCtrl', function($scope) {
 
 Enable & Disable Elements
 --------------------------
+그렇다면 이제 어떻게 HTML Element를 Enable/Disable 시키는지를 알아보자.   
+  
+~~~
+// exam5.js
+var app5 = angular.module('app5', []);
+
+app5.controller('eventCtrl', function($scope) {
+	
+	$scope.disableButton = true;
+
+});
+~~~
+
+~~~
+// angulartut5.html
+<!DOCTYPE html>
+<html ng-app="app5" ng-cloak>
+	<head>
+		<title>Example</title>
+		<style>
+		[ng\:cloak], [ng-cloak], .ng-cloak {
+			display: none;
+		}
+		.bluetext {
+			color: blue;
+		}
+		.boldtext {
+			font-weight: bold;
+		}
+		.stripedblue {
+			color: #007FFF;
+			background-color: #DBE9F4;
+		}
+		.stripedbeige {
+			color: #CC0000;
+			background-color: #F5F5DC
+		}
+		</style>
+	</head>
+	<body>
+		<div ng-controller="eventCtrl">
+		
+			<button ng-disabled="disableButton">Button</button>
+
+			<input type="checkbox" ng-model="disableButton">DisableButton</button>
+			<p>{{disableButton}}</p>
+
+		</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+			<script src="exam5.js"></script>
+	</body>
+</html>
+~~~
+여기에서 하는 것은 먼저 JavaScript 파일에서 `$scope.disableButton` property를 만들고 거기에 `true`로 초기화 시킨다. 그런 다음 HTML 파일에서 html tag에서 `app5` module을 부르고 div tag에서 `eventCtrl` Controller를 부른 뒤 버튼을 만들고 그 button element에 `ng-disabled`를 더한뒤 거기에 `"disableButton"`값을 넣는다.  
+  
+그리고 `disableButton`의 값은 Check Box에 의해서 달라지도록 input element에 `ng-model`로 `disableButton`을 넣어줬다. 우리는 여기에서 `disableButton`의 값이 어떻게 변하는지를 정확히 알기 위해서 마지막에 `disableButton`값을 출력하는 Expression을 더했다.  
+  
+실제로 위의 예제를 실행해보면 먼저 Button을 사용할 수 없는 상태로 페이지가 출력된다. Check Box에 Check가 되어있고, `disableButton`의 값도 true이다. 하지만 Check Box에서 Check를 없애면 바로 밑에 출력되는 값이 false로 바뀌고, Button도 사용 가능하게 된다.
+
+그렇다면 여기에 element가 보이거나 안 보이게 만드는 방법을 더해보자. 지금부터 만들 것은 시간이 낮인지 밤인지에 따라서 달라지게 하는 것이다.  
+  
+~~~
+// exam5.js
+
+~~~
+
+
 
 
 

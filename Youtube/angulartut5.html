@@ -25,13 +25,16 @@
 	<body>
 		<div ng-controller="eventCtrl">
 		
-			<p>
-				<button ng-disabled="disabledButton">Button</button>
-			</p>
+			<button ng-disabled="disableButton">Button</button>
+			<br><br>
 
-			<p>
-				<input type="checkbox" ng-model="disabledButton">DisableButton</button>
-			</p>
+			<input type="checkbox" ng-model="disableButton">DisableButton
+			<p>{{disableButton}}</p>
+
+			<input type="checkbox" ng-model="dayTimeButton">Morning
+
+			<p ng-hide="!dayTimeButton">Good Morning</p>
+			<p ng-hide="dayTimeButton">Good Evening</p>
 
 		</div>
 			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
