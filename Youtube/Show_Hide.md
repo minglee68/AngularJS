@@ -194,7 +194,7 @@ app5.controller('eventCtrl', function($scope) {
 		
 			<button ng-disabled="disableButton">Button</button>
 
-			<input type="checkbox" ng-model="disableButton">DisableButton</button>
+			<input type="checkbox" ng-model="disableButton">DisableButton
 			<p>{{disableButton}}</p>
 
 		</div>
@@ -213,9 +213,46 @@ app5.controller('eventCtrl', function($scope) {
   
 ~~~
 // exam5.js
+var app5 = angular.module('app5', []);
 
+app5.controller('eventCtrl', function($scope) {
+	
+	$scope.disableButton = true;
+
+	$scope.dayTimeButton = true;
+	
+	$scope.capitals = [
+		{"City" : "Montgomery", "State" : "Alabama"},
+		{"City" : "Juneau", "State" : "Alaska"},
+		{"City" : "Phoenix", "State" : "Arizona"},
+		{"City" : "Little Rock", "State" : "Arkansas"}
+	]
+});
 ~~~
 
+~~~
+// angulartut5.html
+...
+
+<div ng-controller="eventCtrl">
+	
+	...
+
+	<input type="checkbox" ng-model="dayTimeButton">Morning
+
+	<p ng-hide="!dayTimeButton">Good Morning</p>
+	<p ng-hide="dayTimeButton">Good Evening</p>
+
+	...
+~~~
+위의 예제와 같이 더한 뒤 다시 실행을 시키면 'Morning'이라는 Check Box와 밑에 Good Morning이라고 출력될 것이다.  
+  
+먼저 JavaScript 파일에서 `$scope.dayTimeButton`을 만들고 그것을 `true`로 초기화 시켰다. 그런 다음 HTML 파일에서 `dayTimeButton`과 연결된 Check Box를 만들었다. 이 Check Box는 Check가 되면 `dayTimeButton`은 'true'가 되고, Check가 없어지면 `dayTimeButton`은 'false'가 될 것이다.  
+  
+그런 다음 두 줄의 p element를 만들었는데, 여기에 각각 `ng-hide`를 더했다. 여기서 차이점이 있는데, 첫번째 `ng-hide`는 `dayTimeButton`이 'ture'라면 반대의 값 'false'를 받아서 `ng-hide`가 실행되지 않고, `dayTimeButton`이 'false'라면 반대의 값 'true'를 받아서 `ng-hide`가 실행되서 사용자에게 보이지 않는다.  
+  
+반대로 두번째 p element는 `dayTimeButton`값을 그대로 받아서 'true'라면 `ng-hide`가 실행이 되고 'false'라면 실행이 되지 않도록 했다.  
+  
 
 
 

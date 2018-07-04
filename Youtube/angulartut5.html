@@ -36,6 +36,15 @@
 			<p ng-hide="!dayTimeButton">Good Morning</p>
 			<p ng-hide="dayTimeButton">Good Evening</p>
 
+			<p>
+				<select ng-model="textStyling">
+					<option value="bluetext">Blue Text</option>
+					<option value="boldtext">Bold Text</option>
+				</select>
+			</p>
+
+			<p ng-class="textStyling">Some Random Text</p>
+
 		</div>
 			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 			<script src="exam5.js"></script>
