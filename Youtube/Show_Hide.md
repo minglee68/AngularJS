@@ -73,9 +73,88 @@ app4.controller('eventCtrl', function($scope) {
 //angulartut4.html
 ...
 
+<div ng-controller="eventCtrl">
+		
+	<input ng-blur="blur = blur + 1" 
+	ng-click="click = click + 1"
+ 	ng-dblclick="dblclick = dblclick + 1"
+      	ng-copy="copy = copy + 1"
+	ng-paste="paste = paste + 1"
+    	ng-cut="cut = cut + 1"
+       	ng-focus="focus = focus + 1"
+	ng-model="confirmed"
+     	ng-change="change = change + 1"
+	ng-keydown="keydown($event)"
+  	ng-mouseenter="mouseenter = mouseenter + 1"
+ 	ng-mouseleave="mouseleave = mouseleave + 1"
+	/>
+			
+	<h4>Blur Events : {{blur}}</h4>
+	<h4>Click Events : {{click}}</h4>
+	<h4>Double Click Events : {{dblclick}}</h4>
+	<h4>Copy Events : {{copy}}</h4>
+	<h4>Paste Events : {{paste}}</h4>
+	<h4>Cut Events : {{cut}}</h4>
+	<h4>Focus Events : {{focus}}</h4>
+	<h4>Change Events : {{change}}</h4>
 
+	<h4>Key Pressed : {{kdkey}}</h4>
+			
+	<h4>Mouse Enter Events : {{mouseenter}}</h4>
+	<h4>Mouse Leave Events : {{mouseleave}}</h4>
+
+</div>
 
 ...
 ~~~
+* **ng-click** : Text Box가 클릭되면 `click` property에 1을 더한다.  
+* **ng-dblclick** : Text Box가 더블 클릭되면 `dblclick` property에 1을 더한다.
+* **ng-copy** : Text Box 안에서 복사를 하면 `copy` property에 1을 더한다.
+* **ng-paste** : Text Box 안에서 붙여넣기를 하면 `paste` property에 1을 더한다.
+* **ng-cut** : Text Box 안에서 잘라내기를 하면 `cut` property에 1을 더한다.
+* **ng-focus** : Text Box에 Focus를 하면 `focus` property에 1을 더한다. `ng-blur`와의 차이점은` ng-blur는 Text Box에서 Focus가 빠져나가면 `blur` property에 1을 더하고, 이것은 Focus를 하면 `focus` property에 1을 더하는 것이다.
+* **ng-model** : 
+* **ng-change** : Text Box안에서 어떤 변화가 생기면 `change` property에 1을 더하겠다.
+* **ng-keydown** : Text Box에 Focus가 되어있는 상태에서 어떤 키를 누르면 그 키값이 `$event`로 `keydown(...)`함수로 보내진다.
+* **ng-mouseenter** : Text Box에 마우스가 올라가면 `mouseenter`에 1을 더한다.
+* **ng-mouseleave** : Text Box에 마우스가 올라가면 `mouseleave`에 1을 더한다.  
+  
+  
+그럼 이제 위의 HTML 파일에 필요한 JavaScript 파일을 만들어 보자.  
+  
+~~~
+// exam4.js
+var app4 = angular.module('app4', []);
+
+app4.controller('eventCtrl', function($scope) {
+	$scope.blur = 0;
+	$scope.click = 0;
+	$scope.dblclick = 0;
+	$scope.copy = 0;
+	$scope.paste = 0;
+	$scope.cut = 0;
+	$scope.focus = 0;
+	$scope.change = 0;
+
+	$scope.keydown = function(e) {
+		$scope.kdkey = String.fromCharCode(e.keyCode);
+	};
+
+	$scope.mouseenter = 0;
+	$scope.mouseleave = 0;
+});
+~~~
+위의 예제에서 알아야 할 것은 keydown()함수가 눌린 키를 `e`로 받는 것이다. 그렇게 해서 받은 `e.keyCode`의 값을 char Code에서 String으로 바꾼뒤, 그것을 `$scope.kdkey`에 넣는다. 그러면 사용자는 입력된 키의 위치를 알려 줄 것이다.
+
+
+
+Enable & Disable Elements
+--------------------------
+
+
+
+
+
+
 
 
