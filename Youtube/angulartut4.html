@@ -24,10 +24,12 @@
 	</head>
 	<body>
 		<div ng-controller="eventCtrl">
-
-
-			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js.min"></script>
-			<script src="js/exam4.js"></script>
+		
+			<input ng-blur="blur = blur + 1" />
+			
+			<h4>Blur Events : {{blur}}</h4>
 		</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+			<script src="exam4.js"></script>
 	</body>
 </html>
