@@ -255,6 +255,15 @@ app5.controller('eventCtrl', function($scope) {
   
 
 
+Change Classes Dynamically
+---------------------------
+여기에선 동적으로 HTML Element의 Class를 바꾸는 방법을 설명할 것이다. 위에서 사용하지도 않을 CSS를 왜 더한거지 싶겠지만, 이제 사용할 것이다. 먼저 아래와 같은 HTML 파일을 만든다. 
+  
+~~~
+// angulartut6.html
+
+~~~
+
 
 
 
