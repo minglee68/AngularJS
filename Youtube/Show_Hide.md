@@ -50,9 +50,32 @@ Event Counter
 ...
 <div ng-controller="eventCtrl">
 
+	<input ng-blur="blur = blur + 1" />
 
+	<h4>Blur Events : {{blur}}</h4>
 
 </div>
 ...
 ~~~
+위의 코드는 사용자가 Text Box에 Focus할 때에 생기는 Blur Event가 일어날 때 마다 `blur`라는 property에 1을 더해줘서 횟수를 count하는 것이다. 이렇게 하고 밑에 예제처럼 새로운 Module 'app4'를 만든다.  
+  
+~~~
+//exam4.js
+var app4 = angular.module('app4', []);
+
+app4.controller('eventCtrl', function($scope) {
+	$scope.blur = 0;
+});
+~~~
+이렇게 하고 실행을 하면 사용자가 Text Box에 Focurs할 때마다 Blur이 생기고, Focus를 풀면 밑의 Blur Events가 1이 늘어나는 것을 확인할 수 있다. 이와 같은 방식으로 모든 Event를 확인해보자.  
+  
+~~~
+//angulartut4.html
+...
+
+
+
+...
+~~~
+
 
