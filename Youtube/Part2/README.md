@@ -99,6 +99,19 @@ Table을 만들 때에 먼저 thead element로 Table의 Head부분을 지정했�
   
 
 
+Simple Register Page
+----------------------
+다음으론 위의 기능에 몇 가지 기능을 더해서 사용자 등록 시스템을 만들어 보자. 일단 먼저 전체 코드를 봐보자.   
+  
+~~~
+// angulartut2.html
+
+~~~
+
+~~~
+// exam2.js
+
+~~~
 
 
 
