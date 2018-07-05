@@ -25,7 +25,7 @@ Getting New Items and Checking Errors
 			padding: 10px;
 		}
 		input.ng-dirty.ng-invalid {
-			border.color: red;
+			border-color: red;
 		}
 		</style>
 	</head>
@@ -112,6 +112,9 @@ Simple Register Page
 // exam2.js
 
 ~~~
+
+
+
 
 
 

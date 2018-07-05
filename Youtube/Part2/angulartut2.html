@@ -13,7 +13,7 @@
 			padding: 10px;
 		}
 		input.ng-dirty.ng-invalid {
-			border.color: red;
+			border-color: red;
 		}
 
 
@@ -28,7 +28,7 @@
 			<form name="userForm" ng-submit="saveUser(userInfo)">
 				
 				<label>First Name: </label>
-				<input type="text" name="fname" 
+				<input type="text" name="fName" 
 				ng-model="userInfo.fName" 
 				ng-required="true" 
 				ng-minlength="2" />
@@ -37,7 +37,7 @@
 					Must Enter a First Name
 				</span>
 
-				<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.minLength">
+				<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.minlength">
 					Must be a Minimum of 2
 				</span>
 
@@ -46,7 +46,7 @@
 
 
 				<label>Last Name: </label>
-				<input type="text" name="lname" 
+				<input type="text" name="lName" 
 				ng-model="userInfo.lName" 
 				ng-required="true" 
 				ng-minlength="2" />
@@ -55,7 +55,7 @@
 					Must Enter a Last Name
 				</span>
 
-				<span class="error-message" ng-show="userForm.lName.$dirty && userForm.lName.$error.minLength">
+				<span class="error-message" ng-show="userForm.lName.$dirty && userForm.lName.$error.minlength">
 					Must be a Minimum of 2
 				</span>	
 
@@ -81,7 +81,10 @@
 
 				<label>Subscribe: </label>
 
-				<input type="checkbox" name="subscribe" ng-model="userInfo.subscribe" ng-true-value="'Subscribe'" ng-false-value="'Don\'t Subscribe'" />
+				<input type="checkbox" name="subscribe" 
+				ng-model="userInfo.subscribe" 
+				ng-true-value="'Subscribe'" 
+				ng-false-value="'Don\'t Subscribe'" />
 
 
 				<br><br>
