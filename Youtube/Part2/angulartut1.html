@@ -48,6 +48,30 @@
 			<h4>{{missingNewItemError}}</h4>
 
 
+		</div> <!-- End of groceryList -->
+
+		<div ng-controller="userCtrl">
+
+			<form name="userForm" ng-submit="saveUser(userInfo)">
+				<label>First Name: </label>
+				<input type="text" name="fname" 
+				ng-model="userInfo.fName" 
+				ng-required="true" 
+				ng-minlength="2" />
+
+				<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.required">
+					Must Enter a First Name
+				</span>
+
+				<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.minLength">
+					Must be a Minimum of 2
+				</span>
+
+				<br><br>
+
+				
+			</form>
+
 		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
