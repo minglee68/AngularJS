@@ -105,13 +105,189 @@ Simple Register Page
   
 ~~~
 // angulartut2.html
+<!DOCTYPE html>
+<html ng-app="app2" ng-cloak>
+	<head>
+		<title>Example</title>
+		<style>
+		[ng\:cloak], [ng-cloak], .ng-cloak {
+			display: none;
+		}
+		table {
+			width: 400px;
+			text-align: left;
+			border: 2px solid black;
+			padding: 10px;
+		}
+		input.ng-dirty.ng-invalid {
+			border-color: red;
+		}
+		</style>
+	</head>
+	<body>
+		
+		<div ng-controller="userCtrl">
 
+			<h3>User List</h3>
+
+			<form name="userForm" ng-submit="saveUser(userInfo)">
+				
+				<label>First Name: </label>
+				<input type="text" name="fName" 
+				ng-model="userInfo.fName" 
+				ng-required="true" 
+				ng-minlength="2" />
+
+				<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.required">
+					Must Enter a First Name
+				</span>
+
+				<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.minlength">
+					Must be a Minimum of 2
+				</span>
+
+
+				<br><br>
+
+
+				<label>Last Name: </label>
+				<input type="text" name="lName" 
+				ng-model="userInfo.lName" 
+				ng-required="true" 
+				ng-minlength="2" />
+
+				<span class="error-message" ng-show="userForm.lName.$dirty && userForm.lName.$error.required">
+					Must Enter a Last Name
+				</span>
+
+				<span class="error-message" ng-show="userForm.lName.$dirty && userForm.lName.$error.minlength">
+					Must be a Minimum of 2
+				</span>	
+
+
+				<br><br>
+
+
+				<label>Street: </label>
+
+				<input type="text" name="street" 
+				ng-model="userInfo.street" 
+				ng-required="true" 
+				ng-minlength="6" 
+				ng-pattern="/^(\d{3,})\s?(\w{0,5})\s([a-zA-Z]{2,30})\s([a-zA-Z]{2,15})\.?\s?(\w{0,5})$/" />
+
+				<span class="error-message" ng-show="userForm.street.$dirty && userForm.street.$invalid">
+					Must Enter a Number, Street, and Street Type (ex: 123 Main St.)
+				</span>
+
+
+				<br><br>
+
+
+				<label>Subscribe: </label>
+
+				<input type="checkbox" name="subscribe" 
+				ng-model="userInfo.subscribe" 
+				ng-true-value="'Subscribe'" 
+				ng-false-value="'Don\'t Subscribe'" />
+
+
+				<br><br>
+
+
+				<label>Delivery Method: </label>
+				<select name="delivery" ng-model="userInfo.delivery" ng-required="true">
+					<option value="Email">Email</option>
+					<option value="Mail">Mail</option>
+				</select>
+
+
+				<br><br>
+
+
+				<input type="submit" value="Save" ng-disabled="userForm.$invalid" />
+
+
+
+				<ul>
+					<li ng-repeat="item in user">
+						{{ 'User: ' + item.fName + " " + item.lName + " " + item.street + " " + item.subscribe + " " + item.delivery }}
+					</li>
+				</ul>
+
+			</form>
+
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+		<script src="exam2.js"></script>
+	</body>
+</html>
 ~~~
 
 ~~~
 // exam2.js
+var app2 = angular.module('app2', []);
 
+app2.controller('userCtrl', function($scope) {
+	$scope.user = [{
+		fName: "Derek",
+		lName: "Banas",
+		subscribe: "Subscribe",
+		delivery: "Email"
+	}];
+
+	$scope.saveUser = function(userInfo){
+		if($scope.userForm.$valid){
+			$scope.user.push({
+				fName: userInfo.fName,
+				lName: userInfo.lName,
+				street: userInfo.street,
+				subscribe: userInfo.subscribe,
+				delivery: userInfo.delivery
+			});
+			console.log('User Saved');
+		} else {
+			console.log("Error: Couldn't Save User");
+		}
+	};
+});
 ~~~
+뭔가 많아 보인다. 하지만 복잡하게 생각하지 않고 하나씩 봐보면 이해하기 편하다. 일단 전체적인 설명을 하자면, 사용자를 등록하는 페이지인데, 우리가 원하는 형식으로 입력이 되면 'Save' Button을 누를 수 있게 한다. 그렇다면 이제 한 항목씩 차례대로 봐보자.    
+  
+
+### First Name 항목  
+  
+~~~
+// angulartut2.html
+...
+
+<form name="userForm" ng-submit="saveUser(userInfo)">
+	
+	<label>First Name: </label>
+	<input type="text" name="fName" 
+	ng-model="userInfo.fName" 
+	ng-required="true" 
+	ng-minlength="2" />
+
+	<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.required">
+		Must Enter a First Name
+	</span>
+
+	<span class="error-message" ng-show="userForm.fName.$dirty && userForm.fName.$error.minlength">
+		Must be a Minimum of 2
+	</span>
+
+	...
+
+</form>
+
+...
+~~~
+일단 먼저 여기엔 안 나와있지만 div tag에서 `ng-controller`로 `userCtrl` Controller를 부른다. 그리고 나서 form tag를 만들건데, 이 form을 통해서 우리의 사용자 데이터를 `saveUser()`이라는 method로 보낼 것이다. 먼저 form element에게 `userForm`이라는 이름을 준다. 이것으로 이 form안에서 받는 모든 데이터는 `userForm`이라는 form아래에 들어간다. 그리고 `ng-submit`을 통해서 `userForm`안에서 입력한 데이터를 `saveUser()` method에 `userInfo`라는 property로 보낸다고 선언한다.   
+  
+첫번째로 우리는 사용자의 First Name을 받을 것이다. 여기서 입력받는 데이터는 적어도 2문자 이상이라고 먼저 제한을 놓을 것이다. 그러기 위해서 가장 중요한 것은 실제 입력을 받을 input element의 attribute들이다. 먼저 Text Box로 입력을 받을 것이기 때문에 당연히 `type` attribute는 `text`이다. 
+
 
 
 
