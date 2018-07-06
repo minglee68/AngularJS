@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="app3" ng-cloak>
+	<head>
+		<title>Example</title>
+		<style>
+		[ng\cloak], [ng-cloak], .ng-cloak {
+			display: none;
+		}
+		</style>
+	</head>
+	<body>
+		<div ng-controller="heroCtrl">
+		
+			<label>Hero to Search for : </label>
+
+			<input type="text" ng-model="heroName" />
+			<br><br>
+
+			<button ng-click="getHeroData()">Submit</button>
+			<br><br>
+
+			{{heroData}}<br>
+
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+		<script src="exam3.js"></script>
+	</body>
+</html>
