@@ -19,14 +19,13 @@ app3.controller('heroCtrl', function($scope, $rootScope){
 		}
 	};
 
-	$scope.$on("heroUpdated", function(event, args){
-		$scope.hero.push({ realName: args.realName, heroName: args.heroName });
-	});
-	
-
 	$scope.addHeroData = function(realName, heroName){
 		$rootScope.$broadcast("heroUpdated", {realName: realName, heroName, heroName});
 		console.log("Real : " + realName + " Hero : " + heroName);
 	};
+
+	$scope.$on("heroUpdated", function(event, args){
+		$scope.hero.push({realName: args.realName, heroName: args.heroName});
+	});
 
 });
