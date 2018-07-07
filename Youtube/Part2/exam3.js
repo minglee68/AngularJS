@@ -1,6 +1,6 @@
 var app3 = angular.module('app3', []);
 
-app3.controller('heroCtrl', function($scope, $rootscope){
+app3.controller('heroCtrl', function($scope, $rootScope){
 	$scope.hero = [
 		{realName: "Bruce Wayne", heroName: "Batman"},
 		{realName: "Clark Kent", heroName: "Superman"}
@@ -18,4 +18,15 @@ app3.controller('heroCtrl', function($scope, $rootscope){
 			}
 		}
 	};
+
+	$scope.$on("heroUpdated", function(event, args){
+		$scope.hero.push({ realName: args.realName, heroName: args.heroName });
+	});
+	
+
+	$scope.addHeroData = function(realName, heroName){
+		$rootScope.$broadcast("heroUpdated", {realName: realName, heroName, heroName});
+		console.log("Real : " + realName + " Hero : " + heroName);
+	};
+
 });

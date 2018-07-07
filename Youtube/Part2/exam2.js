@@ -4,6 +4,7 @@ app2.controller('userCtrl', function($scope) {
 	$scope.user = [{
 		fName: "Derek",
 		lName: "Banas",
+		street: "123 Main St",
 		subscribe: "Subscribe",
 		delivery: "Email"
 	}];
@@ -13,6 +14,7 @@ app2.controller('userCtrl', function($scope) {
 			$scope.user.push({
 				fName: userInfo.fName,
 				lName: userInfo.lName,
+				street:"123 Main St",
 				street: userInfo.street,
 				subscribe: userInfo.subscribe,
 				delivery: userInfo.delivery

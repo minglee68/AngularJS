@@ -23,6 +23,21 @@
 
 		</div>
 
+		<div ng-controller="heroCtrl">
+
+			<label>Hero Name : </label>
+			<input type="text" ng-model="heroName" />
+			<br><br>
+			
+			<label>Real Name : </label>
+			<input type="text" ng-model="realName" />
+			<br><br>
+
+			<button ng-click="addHeroData(realName, heroName)">Add</button>
+
+
+		</div>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 		<script src="exam3.js"></script>
 	</body>
