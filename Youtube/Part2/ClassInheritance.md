@@ -96,13 +96,64 @@ app4.controller('dogCtrl', function($controller){
   
 마지막으로 `this.child`에 `dogData()`라는 새로운 함수를 만들었는데, 여기에서 조금 이상한 점을 찾을 수 있다. 아까 위에서 설명한대로라면 이 함수에서 `this.name`이 아닌 `this.child.name`을 사용해야 할 텐데 이 함수의 definition안에서 `this.name`이나 `this.sound`같이 `this.child`를 사용하지 않는 다는 점이다. 이렇게 사용하는 이유는 `dogData()`라는 함수는 `dogCtrl`의 함수가 아닌, `dogCtrl`안에 있는 `mainCtrl`의 함수이기 때문이다. 따라서 지금 이 `dogData()`라는 함수에서 사용하는 `this`는 `dogCtrl`의 `this`가 아닌 `dogCtrl`안에 있는 `mainCtrl`의 `this`인 것이다.   
   
-위와 같은 형식으로 `this`가 남발하는 것을 보면 이해가 안 갈 수도 있기 때문에, 다른 이해하기 쉬운 방법으로도 설명을 하겠다. 아래의 예제는 위의 exam4.js와 같지만 `this`의 특징을 사용해서 변수이름 안에 넣어서 사용한 경우이다.  
+위와 같은 형식으로 `this`가 남발하는 것을 보면 이해가 안 갈 수도 있기 때문에, 다른 이해하기 쉬운 방법으로도 설명을 하겠다. 아래의 예제는 위의 exam4.js와 같지만 `this`의 특징을 사용해서 변수이름 안에 넣어서 사용한 경우이다. 조금 더 이해하기 쉬울 것이다.   
   
 
 ~~~
 // exam4_modified.js
+var app4 = angular.module('app4', []);
+
+app4.controller('mainCtrl', function(){
+	this.name = "Animal";
+	this.sound = "Grrr";
+
+	this.animalClick = function(){
+		alert(this.name + " says " + this.sound);
+	};
+});
+
+
+
+app4.controller('dogCtrl', function($controller){
+	var dogctrl = this;
+	
+	dogctrl.child = $controller('mainCtrl', {});
+
+	dogctrl.child.name = "Dog";
+
+	dogctrl.child.bark = "Wooof";
+
+	dogctrl.child.dogData = function(){
+		alert(this.name + " says " + this.sound + " and " + this.bark);
+	};
+});
+~~~
+  
+  
+  
+이제 아까 설명하지 않은 HTML의 나머지 부분을 봐보자.  
+  
 
 ~~~
+// angulartut4.html
+...
+
+<div ng-controller="dogCtrl as dog">
+	<p>Name : {{dog.child.name}}</p>
+
+	<p>Sound : {{dog.child.sound}}</p>
+
+	<button ng-click="dog.child.animalClick()">Dog Data</button>
+
+	<button ng-click="dog.child.dogData()">More Dog Data</button><br>
+
+	<input ng-model="dog.child.bark" /><br><br>
+	<span>New Bark : {{dog.child.bark}}</span>
+</div>
+
+...
+~~~
+`dogCtrl` Controller를 `dog`라는 이름으로 사용하겠다고 선언한 뒤, Name과 Sound를 Expression을 사용해서 `dog.child.name`과 `dog.child.sound`를 출력한다. 그리고 본래 `mainCtrl`이 가지고 있는 `animalClick()`함수도 `dog.child.animalClick()`로 사용하고, 새로 만든 `dogData()`함수도 `dog.child.dogData()`로 사용한다. 그런 뒤 `dog.child.bark`가 제대로 사용되고 있는지 input element와 span element를 통해서 확인해본다. input element에서 `ng-model`도 당연히 `"dog.child.bark`가 들어가야 한다.  
 
 
 
