@@ -3,6 +3,8 @@ AngularJS $rootScope
 AngularJS의 중요한 점들 중 하나가 바로 Scope의 개념이다. 이 Tutorial을 진행하면서 계속 얘기한 것 처럼 특정 HTML Element에서 `ng-controller`로 어떤 Controller를 시작하면 그 Element와 그 안에있는 다른 Element들을 위한 Scope가 생긴다. 만일 같은 층에서 두 개의 다른 HTML Element들이 같은 Controller를 `ng-controller`로 불러냈다고 해도 그들은 다른 Scope를 갖는다. 하지만 이 두 개의 다른 Scope들은 결국 `ng-app`로 시작된 하나의 큰 RootScope안에 있는 Scope들이다. 이 개념을 잘 이해하기 위해서 아래의 예제들을 해보자.   
   
 
+### angulartut3.html
+
 ~~~
 // angulartut3.html
 <!DOCTYPE html>
@@ -60,6 +62,9 @@ AngularJS의 중요한 점들 중 하나가 바로 Scope의 개념이다. 이 Tu
   
 하지만 여기에서 문제점이 하나 있다. 두번째 div element에서 Hero정보를 더해도 Scope가 다르기 때문에 그것이 첫번째 div element에도 적용되지 않는 다는 점이다. 이 문제점을 해결하기 위해서 exam3.js에서 `$rootScope`와 `$broadcast`를 사용한다. 이 Service들의 사용법을 알아보자.  
   
+
+
+### exam3.js
   
 ~~~
 // exam3.js
