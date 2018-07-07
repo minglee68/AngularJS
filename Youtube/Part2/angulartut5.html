@@ -10,20 +10,39 @@
 	</head>
 	<body>
 		<div ng-controller="mainCtrl">
+			
+			<h3>'uppercase/lowercase' Filter</h3>
+
 			<label>Make Uppercase : </label>
 			<input type="text" ng-model="name" />
 			<p>Uppercase : {{name | uppercase}}</p>
 			<p>Lowercase : {{name | lowercase}}</p>
 
+			<h3>'currency' Filter</h3>
+
 			<label>Currency Filter : </label>
 			<input type="text" ng-model="money" />
 			<p>Currency : {{money | currency}}</p>
+			
+			<h3>'filter' Filter</h3>
 
+			<label>Name Filter : </label>
+			<input type="text" ng-model="studentName" /><br>
 			<ul>
-				<li ng-repeat="student in student.gpas | filter: studentName | orderBy:'gpa'">
+				<li ng-repeat="student in student.gpas | filter: studentName">
 					{{'Name: ' + student.name + ' : GPA: ' + student.gpa}}
 				</li>
 			</ul>
+
+			<h3>'orderBy' Filter</h3>
+
+			<ul>
+				<li ng-repeat="student in student.gpas | orderBy:'gpa'">
+					{{'Name: ' + student.name + ' : GPA: ' + student.gpa}}
+				</li>
+			</ul>
+
+			<h3>'number' Filter</h3>
 
 			<label>Number Filter : </label>
 			<input type="text" ng-model="numVal" />
@@ -31,8 +50,12 @@
 			<p>No Fractions: {{numVal | number:0}}</p>
 			<p>Negative 4 Decimal: {{numVal | number:4}}</p>
 
+			<h3>'date' Filter</h3>
+
 			<p>Date 1 : {{currDate | date: 'medium'}}</p>
 			<p>Date 2 : {{currDate | date: "MM/dd/yyyy 'at' h:mma"}}</p>
+
+			<h3>'limitTo' Filter</h3>
 
 			<p>Default : {{randomStr}}</p>
 			<p>10 Characters : {{randomStr | limitTo:10}}</p>
@@ -42,6 +65,8 @@
 					{{item}}
 				</li>
 			</ul>
+
+			<h3>Custom Filter</h3>
 
 			<ul>
 				<li ng-repeat="item in weather">
