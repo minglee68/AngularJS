@@ -12,15 +12,13 @@ app4.controller('mainCtrl', function(){
 
 
 app4.controller('dogCtrl', function($controller){
-	var childCtrl = this;
+	this.child = $controller('mainCtrl', {});
 
-	childCtrl.child = $controller('mainCtrl', {});
+	this.child.name = "Dog";
 
-	childCtrl.child.name = "Dog";
+	this.child.bark = "Wooof";
 
-	childCtrl.child.bark = "Wooof";
-
-	childCtrl.child.dogData = function(){
+	this.child.dogData = function(){
 		alert(this.name + " says " + this.sound + " and " + this.bark);
 	};
 });
